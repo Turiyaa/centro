@@ -1,19 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
+<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 
-<AnchorPane prefHeight="417.0" prefWidth="489.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunyoswego.controller.Controller">
-	<children>
-		<Button fx:id="myButton" layoutX="310.0" layoutY="49.0" mnemonicParsing="false" onAction="#showDateTime" prefHeight="25.0" prefWidth="149.0" text="Show Date And Time" />
-		<TextField fx:id="myTextField" layoutX="310.0" layoutY="87.0" />
-		<TextField layoutX="73.0" layoutY="164.0" />
-		<Text layoutX="24.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From" />
-		<Text layoutX="245.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To" />
-		<TextField layoutX="273.0" layoutY="164.0" prefHeight="25.0" prefWidth="156.0" />
-      <Button layoutX="73.0" layoutY="230.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Get Vehicles" />
-	</children>
-</AnchorPane>
+<GridPane alignment="center" hgap="10" prefHeight="728.0" prefWidth="956.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <Pane prefHeight="780.0" prefWidth="968.0" GridPane.rowIndex="1">
+         <children>
+            <Button fx:id="myButton" layoutX="285.0" mnemonicParsing="false" onAction="#pressButton" text="Ok" />
+            <ComboBox fx:id="myBox" layoutX="14.0" prefHeight="31.0" prefWidth="258.0" promptText="Pick a Route" />
+            <TextArea fx:id="aText" layoutX="14.0" layoutY="111.0" prefHeight="551.0" prefWidth="913.0" />
+            <ComboBox fx:id="stopBox" layoutX="337.0" layoutY="-1.0" prefHeight="31.0" prefWidth="295.0" promptText="Pick A Stop" />
+            <Button fx:id="button2" layoutX="647.0" layoutY="-1.0" mnemonicParsing="false" onAction="#pressButton2" text="Ok" />
+            <AreaChart layoutX="176.0" layoutY="171.0">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </AreaChart>
+            <ComboBox fx:id="dirBox" layoutX="14.0" layoutY="42.0" onAction="#pressButton" prefHeight="31.0" prefWidth="258.0" promptText="Pick a Direction" />
+         </children>
+      </Pane>
+   </children>
+</GridPane>
