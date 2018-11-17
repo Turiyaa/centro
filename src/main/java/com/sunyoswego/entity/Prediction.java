@@ -23,13 +23,24 @@ public class Prediction {
 	public Prediction() {
 		
 	}
-	public int getid() {
+	
+	public void displayInfo() {
+		System.out.println("ID: " + id + ", Time Stamp: " + tmstmp + ", Arrival/Departure: " + typ + 
+				           ", Stop Name: " + stpnm + ", Stop ID: " + stpid + ", Vehicle ID: " + vid +
+				           ", Ft Until Next Stop: " + dstp + ", Route: " + rt + ", Route Designator: " + rtdd +
+				           ", Direction: " + rtdir + ", Final Destination: " + des + ", Predicted TOA: " + prdtm +
+				           ", TA Block: " + tablockid + ", TA Trip: " + tatripid + ", Delayed?: " + dly +
+				           ", Dynamic Action: " + dyn + ", Time Left Before Arrival: " + prdctdn + ", Zone?: " + zone);
+	}
+	
+	public Integer getId() {
 		return id;
 	}
 
-	public Integer setId() {
-		return id;
+	public void setId(int id) {
+		this.id = id;
 	}
+	
 	public String getTmstmp() {
 		return tmstmp;
 	}

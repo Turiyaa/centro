@@ -17,9 +17,35 @@ public class Vehicle {
 	private String tablockid;
 	private String zone;
 	
-	public Vehicle()
-	{
+	public Vehicle() {
 		
+	}
+	
+	public Vehicle(int id, String vid, String tmstmp, Double lat, Double lon, String hdg, int pid, String rt, 
+			       String des, int dly, int pdist, int spd, String tatripid, String tablockid, String zone) {
+		setId(id);
+		setVid(vid);
+		setTmstmp(tmstmp);
+		setLat(lat);
+		setLon(lon);
+		setHdg(hdg);
+		setPid(pid);
+		setRt(rt);
+		setDes(des);
+		setDly(dly);
+		setPdist(pdist);
+		setSpd(spd);
+		setTatripid(tatripid);
+		setTablockid(tablockid);
+		setZone(zone);
+	}
+	
+	public void displayInfo() {
+		System.out.println("ID: " + getId() + ", Bus Number: " + getVid() + ", Time Stamp: " + getTmstmp() + 
+				           ", Latitude: " + getLat() + ", Longitude: " + getLon() + ", Direction: " + getHdg() + 
+				           ", Pattern ID: " + getPid() + ", Route: " + getRt() + ", Destination: " + getDes() + 
+				           ", Delayed?: " + getDly() + ", Ft. Traveled: " + getPdist() + ", MPH: " + getSpd() + 
+				           ", TA Trip ID: " + getTatripid() + ", TA Block ID: " + getTablockid() + ", Zone?" + getZone());
 	}
 
 	public Integer getId() {

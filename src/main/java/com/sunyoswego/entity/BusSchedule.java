@@ -2,12 +2,16 @@ package com.sunyoswego.entity;
 
 public class BusSchedule {
 	private int id;
-	private Route route;
-	private String stopid;
+	private int routeId;
+	private String stpid;
 	private String scheduledTime;
 	
 	public BusSchedule(){
 		
+	}
+	
+	public void displayInfo() {
+		System.out.println("ID: " + id + ", Route ID:" + routeId + ", Stop ID: " + stpid + ", Scheduled Time: " + scheduledTime);
 	}
 
 	public int getId() {
@@ -18,20 +22,20 @@ public class BusSchedule {
 		this.id = id;
 	}
 
-	public Route getRoute() {
-		return route;
+	public int getRoute() {
+		return routeId;
 	}
 
-	public void setRoute(Route route) {
-		this.route = route;
+	public void setRoute(int routeId) {
+		this.routeId = routeId;
 	}
 
-	public String getStopid() {
-		return stopid;
+	public String getStpid() {
+		return stpid;
 	}
 
-	public void setStopid(String stopid) {
-		this.stopid = stopid;
+	public void setStpid(String stpid) {
+		this.stpid = stpid;
 	}
 
 	public String getScheduledTime() {

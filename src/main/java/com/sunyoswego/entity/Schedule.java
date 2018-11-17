@@ -13,7 +13,7 @@ public class Schedule {
 	public Schedule() {
 		
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}

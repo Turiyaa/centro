@@ -2,7 +2,6 @@ package com.sunyoswego.entity;
 
 public class Route {
 	private int id;
-	private int rtId;
     private String rt;
 	private String rtnm;
 	private String rtclr;
@@ -11,13 +10,18 @@ public class Route {
 	public Route() {
 		
 	}
-
-	public Integer getRtId() {
-		return rtId;
+	
+	public void displayInfo() {
+		System.out.println("ID: " + getId() + ", Route: " + getRt() + ", Route Name: " + getRtnm() + 
+				           ", Route Color: " + getRtclr() + ", Route Designator: " + getRtdd());
+	}
+	
+	public Integer getId() {
+		return id;
 	}
 
-	public void setRtId(Integer rtId) {
-		this.rtId = rtId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getRt() {
