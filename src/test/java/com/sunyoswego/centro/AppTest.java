@@ -10,10 +10,10 @@ import junit.framework.TestCase;
 public class AppTest extends TestCase {
 	App app = new App();
 	
-	@Test
+/*	@Test
 	public void testHelloWorld() {
 		String helloWorld = "Hello Centro";
 		assertEquals(helloWorld, app.helloCentro());
 		System.out.println(app.helloCentro());
-	}
+	}*/
 }

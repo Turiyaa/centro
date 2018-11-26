@@ -2,7 +2,7 @@ package com.sunyoswego.entity;
 
 public class Stop {
 	private int id;
-	private int stpid;
+	private String stpid;
 	private String stpnm;
 	private double lat;
 	private double lon;
@@ -13,7 +13,7 @@ public class Stop {
 		
 	}
 	
-	public Stop(int id, int stpid, String stpnm, double lat, double lon, String route, String dir) {
+	public Stop(int id, String stpid, String stpnm, double lat, double lon, String route, String dir) {
 		setId(id);
 		setStpid(stpid);
 		setStpnm(stpnm);
@@ -37,11 +37,11 @@ public class Stop {
 		this.id = id;
 	}
 
-	public int getStpid() {
+	public String getStpid() {
 		return stpid;
 	}
 
-	public void setStpid(int stopid) {
+	public void setStpid(String stopid) {
 		this.stpid = stopid;
 	}
 
