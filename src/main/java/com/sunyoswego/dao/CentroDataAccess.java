@@ -16,4 +16,5 @@ public interface CentroDataAccess {
 	ArrayList<Route> getAllRoutes();
 	ArrayList<String> getDirByRoute(String rt);
 	ArrayList<Stop> getStopByRoutAndDir(String rt, String dir);
+	ArrayList<Vehicle> getVehicleHistory(String rt, String time);
 }

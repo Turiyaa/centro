@@ -4,7 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
+import org.joda.time.*;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import com.sunyoswego.entity.BusSchedule;
 import com.sunyoswego.entity.Prediction;
@@ -235,7 +239,46 @@ public class CentroDao implements CentroDataAccess {
 				e.printStackTrace();
 			}
 		}
+		getVehicleHistory("","");
 		return stpList;
 
+	}
+
+	@Override
+	public ArrayList<Vehicle> getVehicleHistory(String rt, String scheduledTime) {
+		//rt = "OSW11";
+		//scheduledTime = "07:50";
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("HH:mm");
+		LocalTime time = formatter.parseLocalTime(scheduledTime);
+		LocalTime lowerTime = time.minusMinutes(5);
+		LocalTime upperTime = time.plusMinutes(5);
+		System.out.println(lowerTime);
+		System.out.println(upperTime);
+		ArrayList<Vehicle> busHistory = new ArrayList<Vehicle>();
+		try {
+			Connection con = MySqlConnection.getConnection();
+			String vehicleHistory = "select * from vehicles\r\n" + "where rt = ? \r\n" + 
+					"			and (select substring_index(tmstmp, \" \", -1) between ? and ?);";
+			stmnt = con.prepareStatement(vehicleHistory);
+			stmnt.setString(1, rt);
+			stmnt.setString(2, lowerTime.toString());
+			stmnt.setString(3, upperTime.toString());
+			ResultSet rs = stmnt.executeQuery();
+			while (rs.next()) {
+				busHistory.add(new Vehicle(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getDouble(5),
+						rs.getString(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getInt(10), rs.getInt(11),
+						rs.getInt(12), rs.getString(13), rs.getString(14), rs.getString(15)));
+			}
+			
+			stmnt.close();
+			rs.close();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+/*		for(Vehicle v: busHistory) {
+			
+			v.displayInfo();
+		}*/
+		return busHistory;
 	}
 }
