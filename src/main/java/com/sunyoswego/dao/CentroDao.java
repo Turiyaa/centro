@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ArrayList;
-import org.joda.time.*;
+
+import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
@@ -239,7 +239,6 @@ public class CentroDao implements CentroDataAccess {
 				e.printStackTrace();
 			}
 		}
-		getVehicleHistory("","");
 		return stpList;
 
 	}
