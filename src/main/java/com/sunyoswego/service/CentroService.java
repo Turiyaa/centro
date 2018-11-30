@@ -10,8 +10,8 @@ import org.joda.time.format.DateTimeFormatter;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.TreeMultimap;
 import com.sunyoswego.dao.CentroDao;
-import com.sunyoswego.entity.Schedule;
 import com.sunyoswego.entity.Vehicle;
 
 public class CentroService {
@@ -70,13 +70,14 @@ public class CentroService {
 
 		// should return times and frequency
 		Multimap<LocalTime, Integer> graphData = ArrayListMultimap.create();
-		graphData.put(xTime1, xTime1Freq);
-		graphData.put(xTime2, xTime2Freq);
-		graphData.put(xTime3, xTime3Freq);
 		graphData.put(xTime4, xTime4Freq);
+		graphData.put(xTime3, xTime3Freq);
 		graphData.put(xTime5, xTime5Freq);
-		
-		return graphData;
+		graphData.put(xTime2, xTime2Freq);
+		graphData.put(xTime1, xTime1Freq);
+		TreeMultimap<LocalTime, Integer> sortedMap = TreeMultimap.create(graphData);
+
+		return sortedMap;
 	}
 
 	private double distance(double lat1, double lon1, double lat2, double lon2) {
