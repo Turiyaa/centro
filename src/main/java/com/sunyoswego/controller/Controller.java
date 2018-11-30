@@ -1,5 +1,10 @@
 package com.sunyoswego.controller;
 
+import java.util.Set;
+
+import org.joda.time.LocalTime;
+
+import com.google.common.collect.Multimap;
 import com.sunyoswego.dao.CentroDao;
 import com.sunyoswego.entity.Route;
 import com.sunyoswego.entity.Stop;
@@ -19,13 +24,13 @@ public class Controller {
 	public ComboBox<String> stopBox;
 	public Button button2;
 	public ComboBox<String> dirBox;
-    public BarChart myBarChart;
+	public BarChart<?, ?> myBarChart;
 	private CentroDao dao = new CentroDao();
 	private CentroService service = new CentroService();
 	private String selectedRoute;
 	private String selectedDir;
 	private String selectedStop;
-	private BarChart<Number, Number> vehicleGraph;
+	Multimap<LocalTime, Integer> graphData;
 	@FXML
 	private ObservableList<String> routeComboBoxData = FXCollections.observableArrayList();
 	private ObservableList<String> dirBoxData = FXCollections.observableArrayList();
@@ -71,24 +76,24 @@ public class Controller {
 		stopBox.setOnAction((event) -> {
 			selectedStop = stopBox.getSelectionModel().getSelectedItem();
 			stopBoxData.clear();
-			service.filterBusHistory("", "");
-			System.out.println(selectedStop);
-			setBarGraph();
+			// pass ston lat, lon, scheduledtime(HH:mm) **Do not Include second* and route
+			graphData = service.filterBusHistory("", "", "","");
+			setBarGraph(graphData);
 
 		});
 	}
 
-	public void setBarGraph() {
+	public void setBarGraph(Multimap<LocalTime, Integer> barGraphData) {
 		XYChart.Series series = new XYChart.Series();
-			myBarChart.getData().clear();
-			series.setName("Arrivals");
-			series.getData().add(new XYChart.Data<>("8:45", 26));
-			series.getData().add(new XYChart.Data<>("8:50", 20));
-			series.getData().add(new XYChart.Data<>("9:00", 13));
-			series.getData().add(new XYChart.Data<>("9:05", 15));
-			series.getData().add(new XYChart.Data<>("9:10", 2));
-			myBarChart.getData().add(series);
-		
+		series.setName("Arrivals");
+		myBarChart.getData().clear();
+		Set<LocalTime> keys = barGraphData.keySet();
+		for(LocalTime key : keys) {
+			for(int freq: barGraphData.get(key)) {
+				series.getData().add(new XYChart.Data<>(key.toString().substring(0, 5), freq));				
+			}
+		}
+		myBarChart.getData().add(series);
 	}
 
 }
