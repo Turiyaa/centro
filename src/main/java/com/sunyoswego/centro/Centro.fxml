@@ -10,30 +10,28 @@
 <?import javafx.scene.control.Label?>
 
 <GridPane alignment="center" hgap="10" prefHeight="728.0" prefWidth="956.0" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sunyoswego.controller.Controller">
+   <children>
+      <Pane prefHeight="780.0" prefWidth="968.0" GridPane.rowIndex="1">
+         <children>
+            <ComboBox fx:id="myBox" layoutX="37.0" layoutY="16.0" prefHeight="31.0" prefWidth="213.0" promptText="Pick a Route" />
+            <ComboBox fx:id="stopBox" layoutX="547.0" layoutY="16.0" prefHeight="31.0" prefWidth="193.0" promptText="Pick A Stop" />
+            <ComboBox fx:id="dirBox" layoutX="283.0" layoutY="16.0" prefHeight="31.0" prefWidth="221.0" promptText="Pick a Direction" />
+            <BarChart fx:id="myBarChart" layoutX="184.0" layoutY="193.0" prefHeight="485.0" prefWidth="555.0" title="Arrivals">
+              <xAxis>
+                <CategoryAxis  fx:id="xAxis" animated="false" label="Time" prefHeight="58.0" prefWidth="469.0" side="BOTTOM" tickLabelGap="8.0" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis fx:id="yAxis" label="Frequency" side="LEFT" />
+              </yAxis>
+            </BarChart>
+         </children>
+      </Pane>
+   </children>
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
    <rowConstraints>
       <RowConstraints />
       <RowConstraints />
-      <RowConstraints />
    </rowConstraints>
-   <children>
-      <Pane prefHeight="780.0" prefWidth="968.0" GridPane.rowIndex="1">
-         <children>
-            <ComboBox fx:id="myBox" layoutX="14.0" prefHeight="31.0" prefWidth="258.0" promptText="Pick a Route" />
-            <TextArea fx:id="aText" layoutX="14.0" layoutY="111.0" prefHeight="551.0" prefWidth="913.0" />
-            <ComboBox fx:id="stopBox" layoutX="337.0" layoutY="-1.0" prefHeight="31.0" prefWidth="295.0" promptText="Pick A Stop" />
-            <AreaChart layoutX="176.0" layoutY="171.0">
-              <xAxis>
-                <CategoryAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
-            </AreaChart>
-            <ComboBox fx:id="dirBox" layoutX="14.0" layoutY="42.0" prefHeight="31.0" prefWidth="258.0" promptText="Pick a Direction" />
-         </children>
-      </Pane>
-   </children>
 </GridPane>
