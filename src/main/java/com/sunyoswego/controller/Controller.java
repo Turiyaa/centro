@@ -24,6 +24,7 @@ public class Controller {
 	public ComboBox<String> stopBox;
 	public Button button2;
 	public ComboBox<String> dirBox;
+	public ComboBox<String> timeBox;
 	public BarChart<?, ?> myBarChart;
 	private CentroDao dao = new CentroDao();
 	private CentroService service = new CentroService();
@@ -35,17 +36,20 @@ public class Controller {
 	private ObservableList<String> routeComboBoxData = FXCollections.observableArrayList();
 	private ObservableList<String> dirBoxData = FXCollections.observableArrayList();
 	private ObservableList<String> stopBoxData = FXCollections.observableArrayList();
+	private ObservableList<String> timeBoxData = FXCollections.observableArrayList();
 
 	@FXML
 	public void initialize() {
 		if (routeComboBoxData.isEmpty()) {
 			for (Route rt : dao.getAllRoutes()) {
 				routeComboBoxData.add(rt.getRtnm());
+				System.out.println(rt.getRtnm());
 			}
 		}
 		myBox.setItems(routeComboBoxData);
 		stopBox.setDisable(true);
 		dirBox.setDisable(true);
+		timeBox.setDisable(true);
 		myBox.setOnAction((event) -> {
 			dirBoxData.clear();
 			selectedRoute = myBox.getSelectionModel().getSelectedItem();
@@ -75,6 +79,15 @@ public class Controller {
 
 		stopBox.setOnAction((event) -> {
 			selectedStop = stopBox.getSelectionModel().getSelectedItem();
+			if (selectedRoute != null && selectedDir != null && selectedStop != null) {
+				timeBox.setDisable(false);
+				timeBoxData.clear();
+				for (String time : dao.getTimesFromRouteIDandStopIDandDir(selectedRoute, selectedStop, selectedDir)) {
+					timeBoxData.add(time);
+				}
+				ObservableList<String> times = FXCollections.observableArrayList(timeBoxData);
+				timeBox.setItems(times);
+			}
 			stopBoxData.clear();
 			// pass ston lat, lon, scheduledtime(HH:mm) **Do not Include second* and route
 			graphData = service.filterBusHistory("", "", "","");
