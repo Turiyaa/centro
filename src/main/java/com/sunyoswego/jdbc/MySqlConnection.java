@@ -10,8 +10,8 @@ public class MySqlConnection {
 		try {
 			if (con == null) {
 				Class.forName("com.mysql.jdbc.Driver");
-				con = DriverManager.getConnection("jdbc:mysql://host:3306/dbname", "user",
-						"password");
+				con = DriverManager.getConnection("jdbc:mysql://pi.cs.oswego.edu:3306/Centro", "centroWriter",
+                        "centroWriter");
 			}
 	
 		} catch (Exception e) {
