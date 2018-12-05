@@ -19,10 +19,10 @@ public class CentroService {
 
 	public Multimap<LocalTime, Integer> filterBusHistory(String lat2, String lon2, String scheduledTime, String rt) {
 		dao = new CentroDao();
-		lat2 = "43.45395200000100";
-		lon2 = "-76.54026300000000";
-		scheduledTime = "08:00";
-		rt = "OSW11";
+		//lat2 = "43.45395200000100";
+		//lon2 = "-76.54026300000000";
+		//scheduledTime = "08:00";
+		//rt = "OSW11";
 		ArrayList<Double> distanceList = new ArrayList<>();
 		ArrayList<Vehicle> filterVehicles = new ArrayList<Vehicle>();
 		ArrayList<Vehicle> closestVehicleData = new ArrayList<Vehicle>();

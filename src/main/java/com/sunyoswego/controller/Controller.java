@@ -31,6 +31,7 @@ public class Controller {
 	private String selectedRoute;
 	private String selectedDir;
 	private String selectedStop;
+	private String selectedTime;
 	Multimap<LocalTime, Integer> graphData;
 	@FXML
 	private ObservableList<String> routeComboBoxData = FXCollections.observableArrayList();
@@ -43,13 +44,14 @@ public class Controller {
 		if (routeComboBoxData.isEmpty()) {
 			for (Route rt : dao.getAllRoutes()) {
 				routeComboBoxData.add(rt.getRtnm());
-				System.out.println(rt.getRtnm());
 			}
 		}
+		
 		myBox.setItems(routeComboBoxData);
 		stopBox.setDisable(true);
 		dirBox.setDisable(true);
 		timeBox.setDisable(true);
+		
 		myBox.setOnAction((event) -> {
 			dirBoxData.clear();
 			selectedRoute = myBox.getSelectionModel().getSelectedItem();
@@ -85,14 +87,25 @@ public class Controller {
 				for (String time : dao.getTimesFromRouteIDandStopIDandDir(selectedRoute, selectedStop, selectedDir)) {
 					timeBoxData.add(time);
 				}
-				ObservableList<String> times = FXCollections.observableArrayList(timeBoxData);
+				ObservableList<String> times = FXCollections.observableArrayList("07:50", "07:55", "08:00", "08:05", "08:10", "08:15");//remember to change back to timeBoxData
 				timeBox.setItems(times);
 			}
 			stopBoxData.clear();
 			// pass ston lat, lon, scheduledtime(HH:mm) **Do not Include second* and route
-			graphData = service.filterBusHistory("", "", "","");
-			setBarGraph(graphData);
 
+
+		});
+		
+		timeBox.setOnAction((event) -> {
+			selectedTime = timeBox.getSelectionModel().getSelectedItem();
+			if (selectedStop.equals("RICE CREEK")) {
+				graphData = service.filterBusHistory("43.430111", "-76.549381", selectedTime, "OSW11");
+				setBarGraph(graphData);
+			} else if (selectedStop.equals("Laker Hall")) {
+				graphData = service.filterBusHistory("43.445329", "-76.535659", selectedTime, "OSW11");
+				setBarGraph(graphData);
+			}
+			
 		});
 	}
 
