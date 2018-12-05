@@ -39,6 +39,7 @@ public class Controller {
 	private ObservableList<String> stopBoxData = FXCollections.observableArrayList();
 	private ObservableList<String> timeBoxData = FXCollections.observableArrayList();
 
+	@SuppressWarnings("restriction")
 	@FXML
 	public void initialize() {
 		if (routeComboBoxData.isEmpty()) {
@@ -47,6 +48,8 @@ public class Controller {
 			}
 		}
 		
+		
+		myBarChart.setAnimated(false);
 		myBox.setItems(routeComboBoxData);
 		stopBox.setDisable(true);
 		dirBox.setDisable(true);
@@ -54,6 +57,8 @@ public class Controller {
 		
 		myBox.setOnAction((event) -> {
 			dirBoxData.clear();
+			stopBoxData.clear();
+			timeBoxData.clear();
 			selectedRoute = myBox.getSelectionModel().getSelectedItem();
 			stopBox.setDisable(true);
 			if (selectedRoute != null) {
@@ -84,35 +89,43 @@ public class Controller {
 			if (selectedRoute != null && selectedDir != null && selectedStop != null) {
 				timeBox.setDisable(false);
 				timeBoxData.clear();
-				for (String time : dao.getTimesFromRouteIDandStopIDandDir(selectedRoute, selectedStop, selectedDir)) {
+				for (String time : service.getAllBusSchedule(selectedStop)) {
 					timeBoxData.add(time);
 				}
-				ObservableList<String> times = FXCollections.observableArrayList("07:50", "07:55", "08:00", "08:05", "08:10", "08:15");//remember to change back to timeBoxData
+				ObservableList<String> times = FXCollections.observableArrayList(timeBoxData);
 				timeBox.setItems(times);
 			}
 			stopBoxData.clear();
 			// pass ston lat, lon, scheduledtime(HH:mm) **Do not Include second* and route
 
-
 		});
 		
 		timeBox.setOnAction((event) -> {
 			selectedTime = timeBox.getSelectionModel().getSelectedItem();
-			if (selectedStop.equals("RICE CREEK")) {
-				graphData = service.filterBusHistory("43.430111", "-76.549381", selectedTime, "OSW11");
-				setBarGraph(graphData);
-			} else if (selectedStop.equals("Laker Hall")) {
-				graphData = service.filterBusHistory("43.445329", "-76.535659", selectedTime, "OSW11");
-				setBarGraph(graphData);
-			}
 			
+			if (selectedRoute.equals("SUNY Oswego Green Route")) {
+				if (selectedStop.equals("RICE CREEK")) {
+					graphData = service.filterBusHistory("43.430133", "-76.549355", selectedTime, "OSW11");
+				} else if (selectedStop.equals("Laker Hall")) {
+					graphData = service.filterBusHistory("43.445329", "-76.535659", selectedTime, "OSW11");
+				} else if (selectedStop.equals("SUNY OSWEGO LAKER HALL")) {
+					graphData = service.filterBusHistory("43.445227", "-76.535441", selectedTime, "OSW11");
+				} else if (selectedStop.equals("SUNY OSWEGO CAMPUS CENTER")) {
+					graphData = service.filterBusHistory("43.453952", "-76.540263", selectedTime, "OSW11");
+				} else {
+					graphData.clear();
+				}
+			} else {
+				graphData.clear();
+			}
+				setBarGraph(graphData);
 		});
 	}
 
 	public void setBarGraph(Multimap<LocalTime, Integer> barGraphData) {
+		myBarChart.getData().clear();
 		XYChart.Series series = new XYChart.Series();
 		series.setName("Arrivals");
-		myBarChart.getData().clear();
 		Set<LocalTime> keys = barGraphData.keySet();
 		for(LocalTime key : keys) {
 			for(int freq: barGraphData.get(key)) {

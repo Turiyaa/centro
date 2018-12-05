@@ -1,5 +1,8 @@
 package com.sunyoswego.centro;
 
+import java.awt.Color;
+import java.awt.Paint;
+
 import com.sunyoswego.jdbc.MySqlConnection;
 
 import javafx.application.Application;
@@ -19,10 +22,9 @@ public class App extends Application
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		try {
-            Parent root = FXMLLoader.load(getClass()
-                    .getResource("/com/sunyoswego/centro/Centro.fxml"));
- 
+            Parent root = FXMLLoader.load(getClass().getResource("/com/sunyoswego/centro/Centro.fxml"));
             primaryStage.setTitle("Centro");
+            root.setStyle("-fx-background-color: #91bbff;");
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
          

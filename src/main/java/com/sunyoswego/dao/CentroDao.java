@@ -275,10 +275,21 @@ public class CentroDao implements CentroDataAccess {
 		return multiMap;
 	}
 	
-	public ArrayList<String> getTimesFromRouteIDandStopIDandDir(String rtID, String stID, String Dir) {
+	public ArrayList<String> getTimesFromRouteIDandStopID(String rtID, String stID) {
 		ArrayList<String> times = new ArrayList<String>();
-		
-		//***************over here***************
+		if (rtID.equals("3")) {
+			if (stID.equals("17941")) {
+				times.add("");
+				times.add("");
+				times.add("");
+				times.add("");
+				times.add("");
+				times.add("");
+				times.add("");
+				times.add("");
+				
+			}
+		}
 		
 		
 		return times;
