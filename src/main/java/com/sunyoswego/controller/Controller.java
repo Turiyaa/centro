@@ -101,7 +101,7 @@ public class Controller {
 		});
 		
 		timeBox.setOnAction((event) -> {
-			selectedTime = timeBox.getSelectionModel().getSelectedItem();
+			selectedTime = timeBox.getSelectionModel().getSelectedItem().toString();
 			
 			if (selectedRoute.equals("SUNY Oswego Green Route")) {
 				if (selectedStop.equals("RICE CREEK")) {

@@ -42,16 +42,16 @@ public class CentroService {
 		}
 		DateTimeFormatter formatter = DateTimeFormat.forPattern("HH:mm");
 		LocalTime time = formatter.parseLocalTime(scheduledTime);
-		LocalTime xTime1 = time.minusMinutes(4);
+		LocalTime xTime1 = time.minusMinutes(6);
 		int xTime1Freq = 0;
-		LocalTime xTime2 = time.minusMinutes(2);
+		LocalTime xTime2 = time.minusMinutes(3);
 		int xTime2Freq = 0;
 		int xTime3Freq = 0;
 		LocalTime xTime3 = time;
 		int xTime4Freq = 0;
-		LocalTime xTime4 = time.plusMinutes(2);
+		LocalTime xTime4 = time.plusMinutes(3);
 		int xTime5Freq = 0;
-		LocalTime xTime5 = time.plusMinutes(4);
+		LocalTime xTime5 = time.plusMinutes(6);
 
 		for (Vehicle vc : closestVehicleData) {
 			String timeStr = vc.getTmstmp().substring(9,14);

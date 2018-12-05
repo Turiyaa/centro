@@ -10,8 +10,7 @@ public class MySqlConnection {
 		try {
 			if (con == null) {
 				Class.forName("com.mysql.jdbc.Driver");
-				con = DriverManager.getConnection("jdbc:mysql://pi.cs.oswego.edu:3306/Centro", "centroWriter",
-                        "centroWriter");
+				con = DriverManager.getConnection("");
 			}
 	
 		} catch (Exception e) {
